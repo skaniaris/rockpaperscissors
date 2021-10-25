@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>RockPaperScissors</title>
+        <meta charset="UTF-8">
+        <script>
+            function computerPlay() {
+            let rockpapsci = ['rock', 'paper', 'scissor']; 
+            let randomNumber = Math.floor(Math.random()*rockpapsci.length); 
+            return rockpapsci[randomNumber]; 
+            }
+            let computerSelection = computerPlay(); 
+            console.log(computerSelection); 
+            
+            let playerSelection = prompt('Choose: rock, paper, scissor'); 
+
+            function playRound(select1, select2) {
+                if (select1 === select2) {
+                    alert('Its a tie');
+                
+                } else if (select1 !== select2) {
+                while (select1 === 'rock') {
+                    if (select2 ==='scissor') {
+                        alert('You win, rock beats scissors'); 
+                        break; 
+                    } else if (select2 === 'paper') {
+                        alert('Computer wins, paper beats rock'); 
+                        break; 
+                    } else {
+                       alert('something went wrong'); 
+                       break; 
+                    }
+                    
+               
+                } while (select1 === 'paper') {
+                    if (select2 ==='scissor') {
+                        alert('Computer wins, scissors beats paper'); 
+                        break; 
+                    } else if (select2 === 'rock') {
+                        alert('You win, paper beats rock');
+                        break;  
+                    } else {
+                        alert('something went wrong'); 
+                        break; 
+                    }
+        
+                }
+                    while (select1 === 'scissor') {
+                    if (select2 ==='paper') {
+                        alert('You win, scissors beat paper'); 
+                        break; 
+                    } else if (select2 === 'rock') {
+                        alert('Computer wins, rock beats scissors'); 
+                        break; 
+                    } else {
+                        alert('something went wrong'); 
+                        break; 
+                    }
+        
+                }
+            } else {
+                alert('something went wrong'); 
+            }
+
+            }
+
+            playRound(playerSelection,computerSelection); 
+        </script>
+    </head>
+</html>
