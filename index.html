@@ -9,25 +9,55 @@
             let randomNumber = Math.floor(Math.random()*rockpapsci.length); 
             return rockpapsci[randomNumber]; 
             }
-            let computerSelection = computerPlay(); 
-            console.log(computerSelection); 
-            
-            let playerSelection = prompt('Choose: rock, paper, scissor'); 
 
-            function playRound(select1, select2) {
+            let computerSelection; 
+            
+            let playerSelection; 
+
+            function elementSelection() {
+            for (let i = 1; i <= 5; i++){
+              computerSelection = computerPlay(); 
+            console.log(computerSelection); 
+            playerSelection = prompt('Choose: rock, paper, scissor');
+            playerSelection = playerSelection.toLowerCase()  
+            playRound(playerSelection,computerSelection); 
+            console.log(computerEndScore); 
+            console.log(playerEndScore); 
+            console.log(i); 
+            if (computerSelection === playerSelection) {
+                i--; 
+            } else {
+                continue; 
+            }
+            }
+            if (playerEndScore > computerEndScore) {
+                alert('You win!'); 
+            } else if (computerEndScore > playerEndScore) {
+                alert('You lose. Computer wins.'); 
+            } else {
+                alert('Something went wrong 1'); 
+            }
+            }
+           
+            let playerEndScore = 0; 
+            let computerEndScore = 0; 
+
+            function playRound(select1, select2) { 
                 if (select1 === select2) {
-                    alert('Its a tie');
+                    alert('Its a tie, no points');
                 
                 } else if (select1 !== select2) {
                 while (select1 === 'rock') {
                     if (select2 ==='scissor') {
                         alert('You win, rock beats scissors'); 
+                        playerEndScore = playerEndScore + 1; 
                         break; 
                     } else if (select2 === 'paper') {
                         alert('Computer wins, paper beats rock'); 
+                        computerEndScore = computerEndScore + 1; 
                         break; 
                     } else {
-                       alert('something went wrong'); 
+                       alert('something went wrong 2'); 
                        break; 
                     }
                     
@@ -35,12 +65,14 @@
                 } while (select1 === 'paper') {
                     if (select2 ==='scissor') {
                         alert('Computer wins, scissors beats paper'); 
+                        computerEndScore = computerEndScore + 1; 
                         break; 
                     } else if (select2 === 'rock') {
                         alert('You win, paper beats rock');
+                        playerEndScore = playerEndScore + 1; 
                         break;  
                     } else {
-                        alert('something went wrong'); 
+                        alert('something went wrong 3'); 
                         break; 
                     }
         
@@ -48,23 +80,25 @@
                     while (select1 === 'scissor') {
                     if (select2 ==='paper') {
                         alert('You win, scissors beat paper'); 
+                        playerEndScore = playerEndScore + 1; 
                         break; 
                     } else if (select2 === 'rock') {
                         alert('Computer wins, rock beats scissors'); 
+                        computerEndScore = computerEndScore + 1; 
                         break; 
                     } else {
-                        alert('something went wrong'); 
+                        alert('something went wrong 4'); 
                         break; 
                     }
         
                 }
             } else {
-                alert('something went wrong'); 
+                alert('something went wrong 5'); 
             }
 
             }
 
-            playRound(playerSelection,computerSelection); 
+            elementSelection(); 
         </script>
     </head>
 </html>
