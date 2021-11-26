@@ -3,102 +3,196 @@
     <head>
         <title>RockPaperScissors</title>
         <meta charset="UTF-8">
+        
+    </head>
+    <body>
+        <h1> Rock, Paper, Scissors</h1>
+        <h3> Best of five. Choose one.</h3>
+
+            <button id = 'rock'>Rock</button>
+            <button id = 'paper'>Paper</button>
+            <button id = 'scissor'>Scissors</button> 
+
+        <div id='results'>
+            <h2></h2>
+        </div>
+
+        <h2>Score</h2>
+
+        <div id ='score'>
+        <div>
+
         <script>
-            function computerPlay() {
-            let rockpapsci = ['rock', 'paper', 'scissor']; 
-            let randomNumber = Math.floor(Math.random()*rockpapsci.length); 
-            return rockpapsci[randomNumber]; 
-            }
-
-            let computerSelection; 
-            
-            let playerSelection; 
-
-            function elementSelection() {
-            for (let i = 1; i <= 5; i++){
-              computerSelection = computerPlay(); 
-            console.log(computerSelection); 
-            playerSelection = prompt('Choose: rock, paper, scissor');
-            playerSelection = playerSelection.toLowerCase()  
-            playRound(playerSelection,computerSelection); 
-            console.log(computerEndScore); 
-            console.log(playerEndScore); 
-            console.log(i); 
-            if (computerSelection === playerSelection) {
-                i--; 
-            } else {
-                continue; 
-            }
-            }
-            if (playerEndScore > computerEndScore) {
-                alert('You win!'); 
-            } else if (computerEndScore > playerEndScore) {
-                alert('You lose. Computer wins.'); 
-            } else {
-                alert('Something went wrong 1'); 
-            }
-            }
-           
+ 
             let playerEndScore = 0; 
             let computerEndScore = 0; 
+            let roundNumber = 0; 
+            
+            let computerSelection; 
+            let playerSelection; 
 
-            function playRound(select1, select2) { 
-                if (select1 === select2) {
-                    alert('Its a tie, no points');
-                
+            const results = document.getElementById('results'); 
+            results.style.border = 'solid black'; 
+            results.style.height = '300px'; 
+            results.style.margin = '20px 0px';
+            results.style.width = '300px';
+
+            const score = document.getElementById('score');
+            score.style.border = 'solid black';
+            score.style.height = '200px';
+            score.style.margin = '20px 0px';
+            score.style.width = '300px';
+        
+
+            const lineBr = document.createElement('br'); 
+
+            const buttons = document.querySelectorAll('button'); 
+            buttons.forEach((button) => {
+                button.addEventListener('click', () => {
+                playerSelection = button.id; 
+                console.log(playerSelection); 
+                playGame(); 
+                }); 
+            }); 
+
+            
+            function computerPlay() {
+                let rockpapsci = ['rock', 'paper', 'scissor']; 
+                let randomNumber = Math.floor(Math.random()*rockpapsci.length); 
+                computerSelection = rockpapsci[randomNumber]; 
+            }
+
+            function playGame() {
+              roundNumber ++; 
+              computerPlay();   
+              playRound(playerSelection,computerSelection); 
+              results.appendChild(lineBr); 
+              console.log(roundNumber); 
+            }
+           
+            function playRound(select1, select2) {  
+                while (roundNumber <= 5) {
+                    if (select1 === select2) {
+                        results.innerHTML += 'Its a tie, no points'; 
+
+                        score.innerHTML = 'Computer Score: ' + computerEndScore; 
+                        score.appendChild(lineBr); 
+                        score.innerHTML += 'Your Score: ' + playerEndScore; 
+                        score.appendChild(lineBr); 
+                        score.innerHTML += 'Round Number: ' + roundNumber; 
+
                 } else if (select1 !== select2) {
                 while (select1 === 'rock') {
                     if (select2 ==='scissor') {
-                        alert('You win, rock beats scissors'); 
+                        results.innerHTML += 'You win, rock beats scissors'; 
+                        
                         playerEndScore = playerEndScore + 1; 
+
+                        score.innerHTML = 'Computer Score: ' + computerEndScore;
+                        score.appendChild(lineBr);
+                        score.innerHTML += 'Your Score: ' + playerEndScore;
+                        score.appendChild(lineBr);
+                        score.innerHTML += 'Round Number: ' + roundNumber;
+
                         break; 
                     } else if (select2 === 'paper') {
-                        alert('Computer wins, paper beats rock'); 
+                        results.innerHTML += 'Computer wins, paper beats rock'; 
+                        
                         computerEndScore = computerEndScore + 1; 
+
+                        score.innerHTML = 'Computer Score: ' + computerEndScore;
+                        score.appendChild(lineBr);
+                        score.innerHTML += 'Your Score: ' + playerEndScore;
+                        score.appendChild(lineBr);
+                        score.innerHTML += 'Round Number: ' + roundNumber;
+
                         break; 
                     } else {
-                       alert('something went wrong 2'); 
+                       results.innerHTML += 'something went wrong 2';
                        break; 
                     }
                     
                
                 } while (select1 === 'paper') {
                     if (select2 ==='scissor') {
-                        alert('Computer wins, scissors beats paper'); 
+                        results.innerHTML +='Computer wins, scissors beats paper'; 
+                        
                         computerEndScore = computerEndScore + 1; 
+
+                        score.innerHTML = 'Computer Score: ' + computerEndScore;
+                        score.appendChild(lineBr);
+                        score.innerHTML += 'Your Score: ' + playerEndScore;
+                        score.appendChild(lineBr);
+                        score.innerHTML += 'Round Number: ' + roundNumber;
+
                         break; 
                     } else if (select2 === 'rock') {
-                        alert('You win, paper beats rock');
+                        results.innerHTML += 'You win, paper beats rock';
+                        
                         playerEndScore = playerEndScore + 1; 
+
+                        score.innerHTML = 'Computer Score: ' + computerEndScore;
+                        score.appendChild(lineBr);
+                        score.innerHTML += 'Your Score: ' + playerEndScore;
+                        score.appendChild(lineBr);
+                        score.innerHTML += 'Round Number: ' + roundNumber;
+
                         break;  
                     } else {
-                        alert('something went wrong 3'); 
+                        results.innerHTML += 'something went wrong 3'; 
                         break; 
                     }
         
                 }
                     while (select1 === 'scissor') {
                     if (select2 ==='paper') {
-                        alert('You win, scissors beat paper'); 
+                        results.innerHTML += 'You win, scissors beat paper'; 
+                        
                         playerEndScore = playerEndScore + 1; 
+
+                        score.innerHTML = 'Computer Score: ' + computerEndScore;
+                        score.appendChild(lineBr);
+                        score.innerHTML += 'Your Score: ' + playerEndScore;
+                        score.appendChild(lineBr);
+                        score.innerHTML += 'Round Number: ' + roundNumber;
+
                         break; 
                     } else if (select2 === 'rock') {
-                        alert('Computer wins, rock beats scissors'); 
+                        results.innerHTML += 'Computer wins, rock beats scissors'; 
+                        
                         computerEndScore = computerEndScore + 1; 
+
+                        score.innerHTML = 'Computer Score: ' + computerEndScore;
+                        score.appendChild(lineBr);
+                        score.innerHTML += 'Your Score: ' + playerEndScore;
+                        score.appendChild(lineBr);
+                        score.innerHTML += 'Round Number: ' + roundNumber;
+
                         break; 
                     } else {
-                        alert('something went wrong 4'); 
+                        results.innerHTML += 'something went wrong 4'; 
                         break; 
                     }
         
                 }
-            } else {
-                alert('something went wrong 5'); 
-            }
+            }  
+                if (roundNumber === 5) {
+                    if (computerEndScore > playerEndScore) {
+                        score.appendChild(lineBr); 
+                        score.innerHTML += 'Computer wins. You lose.'; 
+                    } else if (playerEndScore > computerEndScore) {
+                        score.appendChild(lineBr); 
+                        score.innerHTML += 'You win! Computer loses.'; 
+                    }
+                }
 
-            }
+                break; 
 
-            elementSelection(); 
+                }
+                  
+                }
+               
+
         </script>
-    </head>
+    </body>
 </html>
